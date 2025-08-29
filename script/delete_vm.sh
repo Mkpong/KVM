@@ -6,8 +6,6 @@ if [ -z "$VM" ]; then
 fi
 
 echo -n "Please enter your sudo password:"
-read -s sudo_pass
-echo
 
 echo "Delete VM: $VM"
 
@@ -48,6 +46,8 @@ while true; do
 			echo "Deleteing VM and all related files.."
 			virsh destroy "$VM"
 			virsh undefine "$VM" --remove-all-storage
+			virsh pool-destroy "$VM"
+			virsh pool-undefine "$VM"
 			sudo rm -rf "/var/lib/libvirt/images/${VM}"
 			break
 			;;

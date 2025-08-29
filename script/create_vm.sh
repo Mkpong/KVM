@@ -74,11 +74,18 @@ else
 	exit 1
 fi
 
-sudo mkdir -p "/var/lib/libvirt/images/${VM_NAME}"
+STORAGE_POOL_PATH="/mnt/data/images"
 
-BASE_IMG_PATH="/var/lib/libvirt/images/${VM_NAME}/${VM_NAME}-base.qcow2"
-SEED_PATH="/var/lib/libvirt/images/${VM_NAME}/${VM_NAME}-seed.img"
-CLOUD_INIT_BASE_PATH="/var/lib/libvirt/images/${VM_NAME}"
+# sudo mkdir -p "/var/lib/libvirt/images/${VM_NAME}"
+sudo mkdir -p "${STORAGE_POOL_PATH}/${VM_NAME}"
+
+# BASE_IMG_PATH="/var/lib/libvirt/images/${VM_NAME}/${VM_NAME}-base.qcow2"
+# SEED_PATH="/var/lib/libvirt/images/${VM_NAME}/${VM_NAME}-seed.img"
+# CLOUD_INIT_BASE_PATH="/var/lib/libvirt/images/${VM_NAME}"
+
+BASE_IMG_PATH="${STORAGE_POOL_PATH}/${VM_NAME}/${VM_NMAE}-base.qcow2"
+SEED_PATH="${STORAGE_POOL_PATH}/${VM_NAME}/${VM_NAME}-seed.img"
+CLOUD_INIT_BASE_PATH="${STORAGE_POOL_PATH}/${VM_NAME}"
 
 # copy cloud-init folder
 sudo cp "${CLOUD_INIT_FOLDER_PATH}"/* "${CLOUD_INIT_BASE_PATH}"
